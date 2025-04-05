@@ -1,0 +1,3 @@
+Flask
+flask-cors
+aws-serverless-wsgi
