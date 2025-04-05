@@ -1,7 +1,8 @@
 from flask import Flask, jsonify, abort
 from flask_cors import CORS
 import base64
-from aws_serverless_wsgi import handle_request
+from serverless_wsgi import handle_request
+
 
 app = Flask(__name__)
 CORS(app)
@@ -216,3 +217,7 @@ def get_about_description():
 
 def handler(event, context):
     return handle_request(app, event, context)
+
+if __name__ == '__main__':
+    app.run(debug=True)
+
