@@ -218,6 +218,6 @@ def get_about_description():
 def handler(event, context):
     return handle_request(app, event, context)
 
-if __name__ == '__main__':
-    app.run(debug=True)
+# if __name__ == '__main__':
+#     app.run(debug=True)
 
