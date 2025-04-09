@@ -1,0 +1,10 @@
+# Exclude the virtual environment folder
+venv/
+# Exclude Git files
+.git/
+.gitignore
+# Exclude local configuration files and logs
+*.log
+# Exclude other directories that are not needed in production
+tests/
+docs/
