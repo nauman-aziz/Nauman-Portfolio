@@ -134,7 +134,7 @@ def get_project_details(id):
         1: {
             "title": "Atlas",
             "description": "Atlas is a web application that allows users to create and manage projects. The application is built using the MERN stack and features user authentication, project management, and task tracking.",
-            "image_path": "assets/project_atlas.jpg",
+            "image_path": "../assets/project_atlas.jpg",
             "technologies": ["React", "Node.js", "Express", "MongoDB"],
             "demo": "https://atlas-demo.com",
             "source": ""
