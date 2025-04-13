@@ -226,12 +226,7 @@ def get_project_details(id):
 
 @app.route('/api/getProfilePicture')
 def get_profile_picture():
-    # Adjust the path to where your image is stored
-    image_path = '../assets/profilePicture.jpg'
-    with open(image_path, 'rb') as image_file:
-        encoded_string = base64.b64encode(image_file.read()).decode('utf-8')
-    # Return the base64 string in JSON
-    return jsonify({"image": encoded_string})
+    return jsonify({"image": encode_image_to_base64('../assets/profilePicture.jpg')})
 
 @app.route('/api/getAboutDescription')
 def get_about_description():
