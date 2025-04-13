@@ -22,20 +22,22 @@ else:
 def get_api_base_url():
     return app.config['BASE_URL']
 
-def encode_image_to_base64(path):
-    """Encode an image file to a base64 string."""
+def get_asset_path(filename):
+    # Get the absolute path of the assets folder relative to this file.
+    base_dir = os.path.dirname(os.path.abspath(__file__))
+    # Assuming the assets folder is one level up from the api folder
+    return os.path.join(base_dir, '..', 'assets', filename)
+
+def encode_image_to_base64(filename):
+    """Encode an image file to a base64 string using an absolute path."""
+    image_path = get_asset_path(filename)
     try:
-        with open(path, 'rb') as image_file:
+        with open(image_path, 'rb') as image_file:
             return base64.b64encode(image_file.read()).decode('utf-8')
     except FileNotFoundError:
+        print(f"File not found: {image_path}")  # Helpful error logging
         return None
-def encode_image_to_base64(path):
-    """Encode an image file to a base64 string."""
-    try:
-        with open(path, 'rb') as image_file:
-            return base64.b64encode(image_file.read()).decode('utf-8')
-    except FileNotFoundError:
-        return None
+
 
 @app.route('/api/projects')
 def get_projects():
