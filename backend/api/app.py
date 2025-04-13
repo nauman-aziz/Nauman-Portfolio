@@ -1,12 +1,34 @@
+import sys
+import os
+# Add the parent directory (backend) to sys.path so that config.py can be imported
+sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
+
 from flask import Flask, jsonify, abort
 from flask_cors import CORS
 import base64
-# from serverless_wsgi import handle_request
-
+from config import DevelopmentConfig, ProductionConfig
 
 app = Flask(__name__)
 CORS(app)
 
+# Decide which configuration to use based on an environment variable
+if os.environ.get('FLASK_ENV') == 'development':
+    app.config.from_object(DevelopmentConfig)
+else:
+    app.config.from_object(ProductionConfig)
+
+# Endpoint to return the base URL from the configuration
+@app.route('/api-base-url')
+def get_api_base_url():
+    return app.config['BASE_URL']
+
+def encode_image_to_base64(path):
+    """Encode an image file to a base64 string."""
+    try:
+        with open(path, 'rb') as image_file:
+            return base64.b64encode(image_file.read()).decode('utf-8')
+    except FileNotFoundError:
+        return None
 def encode_image_to_base64(path):
     """Encode an image file to a base64 string."""
     try:
